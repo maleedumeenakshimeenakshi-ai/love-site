@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Love Story 💕</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #ffc0cb, #ffe4e1);
+    text-align: center;
+    color: #8b004f;
+    overflow-x: hidden;
+}
+
+.page {
+    display: none;
+    padding: 40px 20px;
+    min-height: 100vh;
+    position: relative;
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.page h1 {
+    font-size: 28px;
+}
+
+.page p {
+    font-size: 18px;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+img {
+    width: 85%;
+    max-width: 300px;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 16px;
+    background-color: #ff69b4;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #ff1493;
+}
+
+.yesBtn {
+    background-color: #ff1493;
+    font-size: 18px;
+    padding: 15px 35px;
+}
+
+#noBtn {
+    position: absolute;
+}
+
+#page6 {
+    position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔊 BACKGROUND MUSIC (replace file if needed) -->
+<audio id="bgMusic" loop>
+    <source src="love_theme.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 0 -->
+<div class="page" id="page0" style="display:block;">
+    <h1>Our Journey Together 💖</h1>
+
+    <p>
+        From the moment you confessed your feelings on  
+        <strong>December 11, 2024</strong> — and I accepted the same day —  
+        my life changed forever ✨💞
+    </p>
+
+    <button onclick="window.open('https://www.jiosaavn.com/song/i-think-they-call-this-love-cover/KV4ZCQIFb0Y', '_blank')">
+        Play Our Song 🎵
+    </button>
+
+    <p>
+        We have been together for <span id="daysCount"></span>
+    </p>
+
+    <button onclick="startStory()">Start Our Story ➜</button>
+</div>
+
+<!-- PAGE 1 : DEC 11, 2024 -->
+<div class="page" id="page1">
+    <h1>December 11, 2024 💌</h1>
+    <p>
+        The day you confessed your feelings…  
+        and the very same day I accepted 💖  
+        A moment that changed everything forever ✨
+    </p>
+
+    <!-- 🔁 IMAGE -->
+    <img src="december11.jpg" alt="December 11 Memory">
+
+    <button onclick="nextPage()">Next ➜</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+    <h1>After A Long Struggle 💞</h1>
+    <p>
+        Your patience, kindness, and love won my heart ❤️  
+        I am grateful for every effort you made 🥰
+    </p>
+    <button onclick="nextPage()">Next ➜</button>
+</div>
+
+<!-- PAGE 3 : FEB 1, 2026 -->
+<div class="page" id="page3">
+    <h1>February 1, 2026 🚗💞</h1>
+    <p>
+        I didn’t know whether this day was special for you or not.  
+        It wasn’t our first drive, but it was our first long drive together.  
+        All I needed was that long drive with you…  
+        even though I hate the distance between us ❤️
+    </p>
+
+    <!-- 🔁 IMAGE -->
+    <img src="longdrive.jpg" alt="Our Long Drive">
+
+    <button onclick="nextPage()">Next ➜</button>
+</div>
+
+<!-- PAGE 4 : JAN 01, 2025 -->
+<div class="page" id="page4">
+    <h1>January 01, 2025 💖</h1>
+    <p>
+        The most favourite day to remember…  
+        a day well spent with you, kanna ❤️  
+        All I need is to spend my whole life with you till my last breath.  
+        <strong>Love you till eternity ♾️💞</strong>
+    </p>
+
+    <!-- 🔁 IMAGE -->
+    <img src="jan01.jpg" alt="January 01 Memory">
+
+    <button onclick="nextPage()">Next ➜</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page5">
+    <h1>Happy Valentine’s Day ❤️</h1>
+    <p>
+        No distance can ever reduce my love for you.  
+        Every moment with you is a treasure 💕
+    </p>
+    <button onclick="nextPage()">Next ➜</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="page6">
+    <h1>Will You Be My Valentine? 💖</h1>
+
+    <p>
+        Every heartbeat whispers your name…  
+        I can’t imagine my life without you 🥰
+    </p>
+
+    <button class="yesBtn" onclick="sayYes()">Yes 💕</button>
+    <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">No 😜</button>
+
+    <p id="response" style="margin-top:60px; font-size:20px;"></p>
+</div>
+
+<script>
+let currentPage = 0;
+
+/* 🔁 START DATE */
+let startDate = new Date("December 11, 2024");
+let today = new Date();
+let days = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+document.getElementById("daysCount").innerText = days + " Days 💕";
+
+function startStory() {
+    let music = document.getElementById("bgMusic");
+    music.volume = 0.6;
+    music.play().catch(() => {});
+    nextPage();
+}
+
+function nextPage() {
+    document.getElementById("page" + currentPage).style.display = "none";
+    currentPage++;
+    document.getElementById("page" + currentPage).style.display = "block";
+}
+
+function sayYes() {
+    document.getElementById("response").innerHTML =
+        "Yayyyy 😭💖 I love you so much kanna! Forever us ♾️❤️";
+}
+
+function moveButton() {
+    let btn = document.getElementById("noBtn");
+    let x = Math.random() * (window.innerWidth - 120);
+    let y = Math.random() * (window.innerHeight - 80);
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+}
+</script>
+
+</body>
+</html>
